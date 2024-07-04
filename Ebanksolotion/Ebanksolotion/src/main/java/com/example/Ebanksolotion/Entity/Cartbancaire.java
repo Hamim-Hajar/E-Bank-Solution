@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -18,9 +19,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Cartbancaire {
     @Id
-    private Integer card_number;
+    private String card_number;
     private String card_type;
-    private LocalDateTime expiration_date;
+    private Date expiration_date;
     private String blockage_reason;
     private boolean active;
     @ManyToOne

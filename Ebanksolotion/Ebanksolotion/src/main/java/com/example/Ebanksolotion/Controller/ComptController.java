@@ -9,7 +9,7 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/compt")
+@RequestMapping("/account/api")
 public class ComptController {
   @Autowired
   ComptService comptService;
@@ -22,10 +22,12 @@ public class ComptController {
     public void save(@RequestBody Compt compt) {
      comptService.save(compt);
 }
+
   @PostMapping("/add")
-    public void add(@RequestBody Compt compt) {
-      comptService.addAccount(compt);
+  public Compt add(@RequestBody Compt compt) {
+    return comptService.addAccount(compt.getType_compt(), compt.getSolde());
   }
+
     @DeleteMapping("/delete/{id}")
     public void deleteAccount(@PathVariable("id") Integer id) {
       comptService.deleteCompt(id);
