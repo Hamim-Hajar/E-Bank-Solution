@@ -2,6 +2,7 @@ package com.example.Ebanksolotion.Service;
 
 import com.example.Ebanksolotion.Entity.Cartbancaire;
 import com.example.Ebanksolotion.Entity.Compt;
+import com.example.Ebanksolotion.Entity.User;
 import com.example.Ebanksolotion.Repository.CartbancaireRepository;
 import com.example.Ebanksolotion.Repository.ComptRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,9 @@ public class ComptService {
     ComptRepository comptRepository;
    @Autowired
     CartbancaireRepository comptCartbancaireRepository;
-   public void save(Compt compt) {
-       comptRepository.save(compt);
+
+      public Compt save(Compt compt) {
+       return comptRepository.save(compt);
    }
       public Compt addAccount(String accountType, double initialBalance){
           Compt compt = new Compt();
@@ -27,6 +29,7 @@ public class ComptService {
           compt.setSolde(initialBalance);
           compt.setDate_creation(new java.util.Date());
           compt.setRib(generateRIB());
+          compt.setRaison_fermeture(compt.getRaison_fermeture());
 
           compt = comptRepository.save(compt);
 
@@ -44,8 +47,8 @@ public class ComptService {
         comptCartbancaireRepository.save(cartbancair);
     }
 
-    private String generateRIB() {
-        // Generate a simple RIB for demonstration purposes
+    String generateRIB() {
+
         Random random = new Random();
         StringBuilder rib = new StringBuilder();
         for (int i = 0; i < 24; i++) {
@@ -77,4 +80,14 @@ public class ComptService {
 
           comptRepository.save(compt);
      }
+
+    Compt createAccountForUser(User user) {
+        Compt compt = new Compt();
+        compt.setType_compt("Courant");
+        compt.setSolde((double) 0);
+        compt.setRib(generateRIB());
+        compt.setUser(user);
+
+        return compt;
+    }
    }

@@ -7,20 +7,21 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin("*")
+
 @RestController
 @RequestMapping("/account/api")
 public class ComptController {
   @Autowired
   ComptService comptService;
+
   @GetMapping("/show")
     public List<Compt> show() {
     return comptService.getComptList();
 
 }
   @PostMapping("/save")
-    public void save(@RequestBody Compt compt) {
-     comptService.save(compt);
+    public Compt saveAccount (@RequestBody Compt compt) {
+     return comptService.save(compt);
 }
 
   @PostMapping("/add")
