@@ -17,7 +17,7 @@ import java.util.Set;
 public class Beneficiaires {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_beneficiaire;
+    private Long id_beneficiaire;
     private String name;
     private Integer account_number;
     private String bank_name;

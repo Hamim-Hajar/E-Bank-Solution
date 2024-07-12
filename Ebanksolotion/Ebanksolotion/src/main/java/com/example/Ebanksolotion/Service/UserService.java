@@ -27,17 +27,23 @@ public class UserService {
         return userRepository.findById(id);
     }
 
-    public User updateUser(User user) {
-        return userRepository.save(user);
+    public User updateUser(Integer id,User user) {
+        User user1 = userRepository.findById(id).orElseThrow(null);
+        user1.setFullName(user.getFullName());
+        user1.setEmail(user.getEmail());
+
+        return userRepository.save(user1);
     }
     public void deleteUser(int id) {
+
         userRepository.deleteById(id);
+
     }
 
 
     public User addUtilisateur(String nom, String email) {
         User user = new User();
-        user.setName(nom);
+        user.setFullName(nom);
         user.setEmail(email);
 
         user = userRepository.save(user);
